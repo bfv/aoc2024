@@ -1,22 +1,21 @@
 
 lines = open(file="day01/input.txt", mode="r").read().split("\n")
 
-left, right = [], []
+lefts, rights = [], []
 for line in lines:
-  nmbrs = line.split("  ")
-  left.append(int(nmbrs[0]))
-  right.append(int(nmbrs[1]))
+  left, right = map(int, line.split())
+  lefts.append(left); rights.append(right)
 
-left.sort(), right.sort()
+lefts.sort(), rights.sort()
 
 distance = 0
-for i in range(len(left)):
-  distance += abs(left[i] - right[i])
+for i in range(len(lefts)):
+  distance += abs(lefts[i] - rights[i])
   
 print(f"day 01a: {distance}")
 
 similarity = 0  
-for i in range(len(left)):
-  similarity += left[i] * right.count(left[i])
+for i in range(len(lefts)):
+  similarity += lefts[i] * rights.count(lefts[i])
   
 print(f"day 01b: {similarity}")
