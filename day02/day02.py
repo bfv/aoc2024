@@ -1,9 +1,6 @@
 
-lines = open(file="day02/input.txt", mode="r").read().split("\n")
-
-reports = []
-for line in lines:
-  reports.append([int(x) for x in line.split()])
+with open(file="day02/input.txt", mode="r") as file:
+  reports = [[int(x) for x in line.split()] for line in file.read().splitlines()]
 
 def is_safe(report) -> 0 | 1:  # 0 = unsafe, 1 = safe
   direction = 0
