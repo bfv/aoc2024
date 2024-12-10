@@ -1,14 +1,16 @@
-import math
 
 equations = []
 with open(file="day07/input.txt", mode="r") as file:
   for line in file.read().splitlines():
     equations.append([int(x) for x in line.replace(":", "").split()])
-  
+
 def check(res: int, numbers: list, operations: list) -> bool: 
-  
+
   if len(numbers) == 1:
     return res == numbers[0]
+  
+  if numbers[0] > res:
+    return False
   
   for op in operations:
     match op:
@@ -34,5 +36,6 @@ for eq in equations:
     a += eq[0]
   if check(eq[0], eq[1:], ["*", "+", "||"]):
     b += eq[0]
-  
+ 
+print(f"iter: {iter}")  
 print(f"day07, a: {a}, b: {b}")
