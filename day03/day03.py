@@ -1,17 +1,36 @@
+def main():
+  lines = ''
+  with open(file="day03/input.txt", mode="r") as file:
+    lines = file.read().splitlines()
 
-lines = ''
-with open(file="day03/__input.txt", mode="r") as file:
-  lines = ''.join(file.read().splitlines())
-  #lines = file.read().splitlines()
-print(lines)
-#exit()
+  digits = list(range(10)).append(',')  
+  a, b = 0, 0
 
-digits = list(range(10)).append(',')  
-a, b = 0, 0
-current_is_do = True
+  enabled = True
+  for line in lines:
+    a += checkLinePart(line)
+    
+    start, pos = 0, 0
+    while pos >= 0:
+      if enabled:
+        pos = line.find("don't()", start)
+        s = line[start:pos]
+        b += checkLinePart(s)
+        if pos >= 0:
+          start = pos
+          enabled = False
+      else:
+        start = line.find("do()", start)
+        if start >= 0:
+          enabled = True
+              
+      if pos == -1 or start == -1:
+        break
+    
+  print(f"day 03, a: {a}, b: {b}")  
+
 
 def get_numbers(str):
-  print(f'  {str}')
   str = str.replace("mul(", "").replace(")", "")
   numbers = str.split(',')
 
@@ -39,16 +58,28 @@ def checkRemainder(line, idx):
       
   return res
 
-    
-for line in lines:
-  # a
+def checkLinePart(line: str) -> int:
+  res = 0
   parts = line.split('mul(')
   for part in parts:    
     numbers = get_numbers(part.split(')')[0])
-    print(numbers)
     if numbers != None:
-      a += numbers[0] * numbers[1]
-  
+      res += numbers[0] * numbers[1]
+  return res
+
+main()
+
+
+
+
+
+
+
+
+
+
+
+
   # b: a approach does not work, 
   # idx = 0
   # done =- False
@@ -59,4 +90,3 @@ for line in lines:
   #   b += checkRemainder(line, idx)
   #   idx += 1
 
-print(f"day 03, a: {a}, b: {b}")  
