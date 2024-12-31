@@ -3,7 +3,6 @@ def main():
   with open(file="day03/input.txt", mode="r") as file:
     lines = file.read().splitlines()
 
-  digits = list(range(10)).append(',')  
   a, b = 0, 0
 
   enabled = True
@@ -67,26 +66,6 @@ def checkLinePart(line: str) -> int:
       res += numbers[0] * numbers[1]
   return res
 
-main()
-
-
-
-
-
-
-
-
-
-
-
-
-  # b: a approach does not work, 
-  # idx = 0
-  # done =- False
-  # while not done:
-  #   idx = line.find("mul(", idx)
-  #   if idx == -1:
-  #     break
-  #   b += checkRemainder(line, idx)
-  #   idx += 1
+if __name__ == "__main__":
+  main()
 
